@@ -38,7 +38,7 @@ public class AdvancedSearch extends Base {
     public int totalCategories() { return this.categories.length; }
 
     /* Find Items by Category */
-    public void findItems(String category) throws InterruptedException { super.retrieve(0, "e1-1").sendKeys(category); }
+    public void findItems(String category) throws InterruptedException { this.driver.findElement(By.id(prop.getProperty("ebayCategories"))).click();  }
 
     /* Find Item by Keyword for specific Category */
     public void findItem(String category, String keyword) {
@@ -128,14 +128,6 @@ public class AdvancedSearch extends Base {
 
     public void retrieveAll(String itemo) {
         String key = prop.getProperty("ebay" + itemo.replaceAll("\\s", ""));
-//        switch(itemo) {
-//            case "Categories": key = prop.getProperty("ebay" + itemo);
-//            case "Filters": key = "LH_SORT_BY"; break;
-//            case "Result Views": key = "LH_VIEW_RESULTS_AS"; break;
-//            case "Results Per Page": key = "LH_IPP"; break;
-//
-//            default: System.out.println("Sorry! The item you are looking for does not exist in this Advanced Search Page. ");
-//        }
 
         System.out.println(key);
         WebElement element = this.driver.findElement(By.id(key));
@@ -159,10 +151,9 @@ public class AdvancedSearch extends Base {
 
     /* Click Super Advanced Search (Bottom of Page Search Button) */
     public void clickSearch(boolean click) {
-        super.retrieve(click ? 1 : 0, prop.getProperty(click ? "upper" : "lower") + "AdvancedSearchButton");
-//        if(click) /* Upper Search Button */
-//            super.retrieve(1,prop.getProperty("upperAdvancedSearchButton")).click();
-//        else /* Lower Search Button */
-//            super.retrieve(0, prop.getProperty("lowerAdvancedSearchButton")).click();
+        if(click)
+            this.driver.findElement(By.xpath(prop.getProperty("upperAdvancedSearchButton"))).click();
+        else
+            this.driver.findElement(By.id(prop.getProperty("lowerAdvancedSearchButton"))).click();
     }
 }

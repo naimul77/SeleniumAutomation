@@ -75,19 +75,22 @@ public class Automation {
 
         /* Test#1: Advanced Search / Find Items by Keyword */
         advancedSearch.findItem("iPhone");
+        advancedSearch.clickSearch(true);
+        Thread.sleep(2000);
+        advancedSearch.reverse();
 
         /* Precondition to Test#2: Retrieve all categories for search and Initialize it in the AdvancedSearch class instance */
-        /* Test#2: Run Advanced Search for each Cateogry */
-        int i = 0;
-        for(String category: advancedSearch.getCategories()) {
-            if(i++ > 5)
-                break;
-
-            advancedSearch.findItems(category);
-            advancedSearch.clickSearch(true);
-            Thread.sleep(2500);
-            advancedSearch.reverse();
-        }
+        /* Test#2: Run Advanced Search for each Category */
+//        int i = 0;
+//        for(String category: advancedSearch.getCategories()) {
+//            if(i++ > 5)
+//                break;
+//
+//            advancedSearch.findItems(category);
+//            advancedSearch.clickSearch(true);
+//            Thread.sleep(2500);
+//            advancedSearch.reverse();
+//        }
 
         /* Precondition to Test#3: Create Hashmap of Random Categories and Keywords for Advanced Search */
         HashMap<String, String> categoryKeys = new HashMap<String, String>();
@@ -135,6 +138,8 @@ public class Automation {
             Thread.sleep(5000);
             advancedSearch.reverse();
         }
+
+        advancedSearch.clickSearch(false);
 
         /* Test#8: Search for Products with Custom Options for Web Results Generation */
         automateProducts();
